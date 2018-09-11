@@ -28,9 +28,9 @@ ppi = function(x) {
 }
 ################### params of AIS and wAIS #################### 
 # The sampling policy is selected among the family of student
-# distributions with fixed degree of freedom and variance :
+# distributions with fixed degree of freedom df and shape matrix Sig_ais :
 df = 3
-Var_ais = diag( 5 , p, p) * (df - 2) / df
+Sig_ais = diag( 5 , p, p) * (df - 2) / df
 # The mean will be updated using the GMM method (as described in Section 3.1 of the article)
 # The initial chosen mean value is
 mu_current_ais = rep(0,p)
@@ -49,8 +49,8 @@ for (t in 1:T)
   ##################################################
   Nt = Nfix  # number of simulations in the step. Here fixed. nt of the paper
   ##################################################
-  betamc = rmt(Nt ,mu_current_ais, Var_ais , df = df)
-  dens = dmt(betamc, mean = mu_current_ais, Var_ais, df = df)
+  betamc = rmt(Nt ,mu_current_ais, Sig_ais , df = df)
+  dens = dmt(betamc, mean = mu_current_ais, Sig_ais, df = df)
   w = apply(betamc, 1, ppi) / dens
   X = betamc * w
   num =  colSums(X)
