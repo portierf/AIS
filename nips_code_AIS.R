@@ -57,7 +57,7 @@ for (t in 1:T)
   denom = sum(w)
   num_actu = num_actu + num
   denom_actu = denom_actu + denom
-  mat_var_1 =  (mean((w-1)^2))^{-1} 
+  mat_var_1 =  (mean((w-1)^2))^{-1}                ## equation (12) in the paper
   num_stab =  mat_var_1 * num
   denom_stab = mat_var_1 * denom
   num_actu_stab = num_actu_stab + num_stab
@@ -66,14 +66,14 @@ for (t in 1:T)
   # Integral estimate
   ###############################################
   # Estimate for AIS and wAIS
-  AIS_estimate = num_actu / denom_actu
-  wAIS_estimate = num_actu_stab / denom_actu_stab
+  AIS_estimate = num_actu / denom_actu              
+  wAIS_estimate = num_actu_stab / denom_actu_stab   ## equation (13) in the paper
   ###############################################
   # Update of the distribution
   ###############################################
   mu_num_actu = mu_num_actu + num
   mu_denom_actu = mu_denom_actu + denom
-  mu_current_ais = mu_num_actu / mu_denom_actu
+  mu_current_ais = mu_num_actu / mu_denom_actu      ## equation (7) in the paper
 }
 cat('AIS_estimate = ',round(AIS_estimate,2),'\n')
 cat('wAIS_estimate = ',round(wAIS_estimate,2),'\n')
